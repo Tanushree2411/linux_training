@@ -1,0 +1,111 @@
+Topics Covered:
+
+Processes
+Threads
+Signals and handlers
+IPC
+seaphores
+Mutex
+Socket programming
+
+
+Processes:
+
+what is process
+A process is an instance of an executing program.A program is a file containing a range of information that describes how to con-
+struct a process at run time.this includes info such as binary file format, machine languae insteuctions, other info to construct a process.one to many relationship.
+
+A process is an abstract entity, defined by the kernel, to which system resources are allocated in order to execute a program.
+
+****************************************************************************************************************************************************************
+memory layout of a process: The memory allocated to each process is composed of a number of parts, usually
+referred to as segments. These segments are as follows: text, initialized data segment, uninitialized data segment, stack heap
+
+Process creation:The fork() system call creates a new process, the child, which is an almost exact duplicate of the calling process, the parent.in parent on success return child pid  or -1.
+
+File sharing between parent and child: When a fork() is performed, the child receives duplicates of all of the parent’s file descriptors. These duplicates are made in the manner of dup(), which means that corresponding descriptors in the parent and the child refer to the same open file description. For synchornization , either wwe can wait till child wxits to open fd or make a copy and close unused fd.
+To avoid , unsued resources being wasted, we can also use copy-on-write technique.
+
+Process states:
+Each process has an execution stat which indicates what it is currently doing.
+New: The OS setting up the process state.
+Ready: ready to run, but waiting for the CPU.
+Running: Executing instructions on the CPU.
+Waiting: Waiting for an event to complete (e.g, I/O).
+Terminate: The OS is destroying this process.
+
+
+monitoring child process using wait():The wait() system call waits for one of the children of the calling process to termi-
+nate and returns the termination status of that child in the buffer pointed to by status.
+
+orphans and Zombie process
+A process which has finished the execution but still has entry in the process table to report to its parent process is known as a zombie process. A child process always first becomes a zombie before being removed from the process table.
+
+A process whose parent process no more exists i.e. either finished or terminated without waiting for its child process to terminate is called an orphan process.
+
+process termination:
+_exit() and exit()(stdio buffers are fluseh)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Threads:
+
+threads introduction:threads are a mechanism that permits an application to perform multiple tasks concurrently. A single process can contain multiple threads
+
+creation, termination
+attaching and detaching threads using pthread_join and pthread_detach when no need to know return value of thread joined
+thread synchronization using mutex
+thread atteibutes 
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Signals:
+
+overview:A signal is a notification to a process that an event has occurred. Signals are some-
+times described as software interrupts.Each signal is defined as a unique (small) integer, starting sequentially from 1.
+These integers are defined in <signal.h> with symbolic names of the form SIGxxxx .On
+Linux, the standard signals are numbered from 1 to 31.
+
+A signal handler is a function, written by the programmer, that performs appropriate tasks in response to the delivery of a signal
+
+Disposition of signals:UNIX systems provide two ways of changing the disposition of a signal: signal() and
+sigaction().
+
+sending sigals throigh ways like raise, kill
+signal masking using sigprocmask
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+IPC:
+
+communication can be data transfer(byte stream , message, pseudoterminals) or shared memory.(system v , posix shared memory, memory mappings).
+datat transfer(byte stream):pipe and fifo and data gram sockets
+data transfer (message): sys V message queueus , posix message queues, datagram socekts with delimited msgs
+
+synchronization facilities FOR SHARED MEMORY:semaphores, file locks ,mutexes
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Socket programming
+
+Socekt domains(unix, ipv4, ipv6)
+socket types (stream and datagram)
+socket system calls (socket,bind,listen,accept,connect)
+genrreic socket address structures
+stream socekts 2 types: active and passivwe
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Fundamentals of tcp/ip:
+
+-networking protocols and layers
+tcp and udp
+sequencing and flow control
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+internet domian socekt:
+
+network byte order
+data represntations and marshalling technique
+internet socekt address structures
+Host and service conversion functions
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.
+
+
+
